@@ -7,7 +7,6 @@ function DisplayData(props) {
 
   //!================================= Edit Modal ==============================
   const EditThis = () => {
-    console.log("12121")
     setshowEditModal(!showEditModal);
 
   };

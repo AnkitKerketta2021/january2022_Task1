@@ -76,6 +76,7 @@ function FetchData() {
       {/*//! ============================ Add Modal ============================ */}
       {showAddModal &&
         <AddModal
+        data={data}
           addDataToLocalStorage={addDataToLocalStorage}
           showAddModal={showAddModal}
         />}

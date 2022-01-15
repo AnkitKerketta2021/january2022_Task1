@@ -6,20 +6,16 @@ function AddModal(props) {
   const [show, setShow] = useState(true);
   const [modalData, setmodalData] = useState({
     postId: "",
-id: "",
-name: "",
-email: "",
-body:""
+    id: props.data.length + 1,
+    name: "",
+    email: "",
+    body: ""
   });
-
-  useEffect(() => {
-   
-  }, [])
 
   //!======================= Add Modal Data =====================
   const AddModalData = () => {
     props.addDataToLocalStorage(modalData);
-    setShow(false)
+    setShow(false);
   };
   const UpdateAddModalInput = event => {
     setmodalData({
