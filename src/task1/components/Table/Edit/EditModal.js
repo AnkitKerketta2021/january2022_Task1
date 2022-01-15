@@ -6,21 +6,23 @@ function EditModal(props) {
   const [show, setShow] = useState(true);
   const [modalData, setmodalData] = useState({
     postId: "",
-    id: "",
-    name: "",
-    email: "",
-    body: ""
+    id: props.selectDataToEdit.id,
+    name: props.selectDataToEdit.name,
+    email: props.selectDataToEdit.email,
+    body: props.selectDataToEdit.body
   });
 
-  
-  useEffect(() => {
-    setmodalData({ ...props.selectedItem })
-  }, [props.selectedItem])
+  // useEffect(
+  //   () => {
+  //     setmodalData({ ...props.data });
+  //   },
+  //   [props.data]
+  // );
 
   //!======================= Edit Modal Data =====================
   const EditModalData = () => {
-    props.EditDataToLocalStorage(modalData);
-    props.data(modalData)
+    // props.EditDataToLocalStorage(modalData);
+    props.data(modalData);
     setShow(false);
   };
 
@@ -32,13 +34,13 @@ function EditModal(props) {
     });
   };
 
-  const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+    props.EditDataModalHide(false);
+  };
   return (
     <div>
-      {/* <Button variant="primary" onClick={handleShow}>
-          Launch static backdrop modal
-        </Button> */}
+     
 
       <Modal
         show={show}

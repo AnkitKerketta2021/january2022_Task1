@@ -3,22 +3,30 @@ import { Table } from "react-bootstrap";
 import EditModal from "./Edit/EditModal";
 
 function DisplayData(props) {
+  const [selectDataToEdit, setselectDataToEdit] = useState([]);
   const [showEditModal, setshowEditModal] = useState(false);
 
   //!================================= Edit Modal ==============================
-  const EditThis = () => {
+  const EditThis = (val, index) => {
     setshowEditModal(!showEditModal);
 
+    setselectDataToEdit(val);
+  };
+  const EditDataModalHide = childEditDataModal => {
+    setshowEditModal(childEditDataModal);
   };
 
   return (
     <div>
       {/*//! ============================ Edit Modal ============================ */}
-      {showEditModal?
-        <EditModal
-          // EditDataToLocalStorage={EditDataToLocalStorage}
-          showEditModal={showEditModal}
-        />:""}
+      {showEditModal
+        ? <EditModal
+            // EditDataToLocalStorage={EditDataToLocalStorage}
+            EditDataModalHide={EditDataModalHide}
+            showEditModal={showEditModal}
+            selectDataToEdit={selectDataToEdit}
+          />
+        : ""}
 
       {props.data
         .filter((val, index) => {
@@ -28,14 +36,11 @@ function DisplayData(props) {
             val.body.toLowerCase().includes(props.searchItem.toLowerCase())
           ) {
             return val;
-          } 
-         
-          else if (
+          } else if (
             val.email.toLowerCase().includes(props.searchItem.toLowerCase())
           ) {
             return val;
           }
-          
         })
         .map((val, index) => {
           return (
@@ -90,7 +95,7 @@ function DisplayData(props) {
               <button
                 id="deleteBtn"
                 className="btn btn-success mb-2 me-4 "
-                onClick={() => EditThis(index)}
+                onClick={() => EditThis(val, index)}
               >
                 Edit
               </button>

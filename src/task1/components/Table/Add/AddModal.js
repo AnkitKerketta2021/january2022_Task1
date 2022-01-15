@@ -24,14 +24,13 @@ function AddModal(props) {
     });
   };
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    props.addDataModalHide(false);
+  };
   // const handleShow = () => setShow(true);
   return (
     <div>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch static backdrop modal
-      </Button> */}
-
       <Modal
         show={show}
         onHide={handleClose}

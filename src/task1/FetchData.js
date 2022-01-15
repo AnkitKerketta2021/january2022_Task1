@@ -46,6 +46,9 @@ function FetchData() {
   const addDataModal = () => {
     setshowAddModal(!showAddModal);
   };
+  const addDataModalHide = (childAddDataModal)=>{
+    setshowAddModal(childAddDataModal)
+  }
 
   // !======================== DELETE =========================
   const deleteThis = id => {
@@ -66,6 +69,8 @@ function FetchData() {
 
   // !============================= Edit ==============================
 
+
+
   // ?===========================================================================================
   // ?======================================= RETURN ============================================
   // ?===========================================================================================
@@ -76,6 +81,7 @@ function FetchData() {
       {/*//! ============================ Add Modal ============================ */}
       {showAddModal &&
         <AddModal
+        addDataModalHide={addDataModalHide}
         data={data}
           addDataToLocalStorage={addDataToLocalStorage}
           showAddModal={showAddModal}
