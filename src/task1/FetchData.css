@@ -1,0 +1,45 @@
+#dataId {
+    background: #fff;
+    width: 60px;
+    text-align: center;
+    padding: 3px;
+    color: #000;
+    font-weight: 900;
+    border-radius: 10%;
+    position: relative;
+    top: 10px;
+}
+
+.getButton:hover {
+    transition: ease-in 0.1s;
+    box-shadow: 3px 3px 8px #777;
+}
+
+#fetchContainer {
+    width: 1111px;
+    margin: auto;
+    box-shadow: 8px 8px 9px #666, 10px 10px 10px #ccc;
+    border-radius: 5px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 20px;
+    transition: ease-in-out 0.3s;
+    background: rgb(48, 92, 224);
+    overflow: hidden;
+}
+
+#fetchContainer:hover {
+    background: rgb(28, 63, 168);
+    transition: ease-in-out 0.3s;
+}
+
+#searchBox {
+    width: 200px;
+    place-content: center;
+}
+
+#deleteBtn {
+    float: right;
+}
+
+/* ============================================================ */
