@@ -5,16 +5,26 @@ import EditModal from "./Edit/EditModal";
 function DisplayData(props) {
   const [selectDataToEdit, setselectDataToEdit] = useState([]);
   const [showEditModal, setshowEditModal] = useState(false);
+  const [selectedIndex, setselectedIndex] = useState(null)
+
 
   //!================================= Edit Modal ==============================
-  const EditThis = (val, index) => {
-    setshowEditModal(!showEditModal);
 
-    setselectDataToEdit(val);
-  };
-  const EditDataModalHide = childEditDataModal => {
+
+
+
+  const editDataModalHide = childEditDataModal => {
     setshowEditModal(childEditDataModal);
   };
+
+
+  const editThis = (data,index) =>{
+ 
+    setselectDataToEdit({...data})
+    setselectedIndex(index)
+    setshowEditModal(true)
+    
+}
 
   return (
     <div>
@@ -22,7 +32,7 @@ function DisplayData(props) {
       {showEditModal
         ? <EditModal
             // EditDataToLocalStorage={EditDataToLocalStorage}
-            EditDataModalHide={EditDataModalHide}
+            editDataModalHide={editDataModalHide}
             showEditModal={showEditModal}
             selectDataToEdit={selectDataToEdit}
           />
@@ -41,6 +51,11 @@ function DisplayData(props) {
           ) {
             return val;
           }
+          else if
+            (val.id === parseInt(props.searchItem)){
+              return val
+            }
+          
         })
         .map((val, index) => {
           return (
@@ -95,7 +110,7 @@ function DisplayData(props) {
               <button
                 id="deleteBtn"
                 className="btn btn-success mb-2 me-4 "
-                onClick={() => EditThis(val, index)}
+                onClick={() => editThis(val, index)}
               >
                 Edit
               </button>

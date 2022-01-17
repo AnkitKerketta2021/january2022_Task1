@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { Input } from "reactstrap";
+import FetchData from "../../../FetchData";
+import { MyProvider } from "../../context/context";
 
 function EditModal(props) {
   const [show, setShow] = useState(true);
+  const [type, settype] = useState("")
   const [modalData, setmodalData] = useState({
     postId: "",
     id: props.selectDataToEdit.id,
@@ -12,22 +15,27 @@ function EditModal(props) {
     body: props.selectDataToEdit.body
   });
 
-  // useEffect(
-  //   () => {
-  //     setmodalData({ ...props.data });
-  //   },
-  //   [props.data]
-  // );
-
   //!======================= Edit Modal Data =====================
-  const EditModalData = () => {
-    // props.EditDataToLocalStorage(modalData);
-    props.data(modalData);
+  const editModalData = () => {
     setShow(false);
-  };
+    props.editDataModalHide(false)
+
+  }
+  // const editModalData = () => {
+  //   settype("edit")
+  //   setShow(false);
+  //   setmodalData({
+  //   id: modalData.id,
+  //   name:modalData.name,
+  //   email: modalData.email,
+  //   body: modalData.body
+  //   })
+  //   props.editDataModalHide(false)
+  // };
+  console.log("Edit Modal:",modalData);
 
   //!======================== Update Input Field =======================
-  const UpdateEditModalInput = event => {
+  const updateEditModalInput = event => {
     setmodalData({
       ...modalData,
       [event.target.name]: event.target.value
@@ -36,11 +44,14 @@ function EditModal(props) {
 
   const handleClose = () => {
     setShow(false);
-    props.EditDataModalHide(false);
+    props.editDataModalHide(false);
   };
   return (
     <div>
-     
+      {true &&
+        <MyProvider value={{datas:modalData,id:props.selectDataToEdit.id,type:type}}>
+          <span style={{display:"none"}}> <FetchData /></span>
+        </MyProvider>}
 
       <Modal
         show={show}
@@ -56,21 +67,21 @@ function EditModal(props) {
             placeholder="Name"
             name="name"
             value={modalData.name}
-            onChange={UpdateEditModalInput}
+            onChange={updateEditModalInput}
             className="mb-2"
           />
           <Input
             placeholder="Email"
             name="email"
             value={modalData.email}
-            onChange={UpdateEditModalInput}
+            onChange={updateEditModalInput}
             className="mb-2"
           />
           <Input
             placeholder="Body"
             name="body"
             value={modalData.body}
-            onChange={UpdateEditModalInput}
+            onChange={updateEditModalInput}
             className="mb-2"
           />
         </Modal.Body>
@@ -78,7 +89,9 @@ function EditModal(props) {
           <Button variant="secondary" onClick={() => handleClose()}>
             Close
           </Button>
-          <Button variant="primary" onClick={EditModalData}>
+          <Button variant="primary" 
+          onClick={editModalData}
+          >
             Update
           </Button>
         </Modal.Footer>

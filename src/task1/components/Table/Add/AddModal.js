@@ -13,11 +13,11 @@ function AddModal(props) {
   });
 
   //!======================= Add Modal Data =====================
-  const AddModalData = () => {
+  const addModalData = () => {
     props.addDataToLocalStorage(modalData);
     setShow(false);
   };
-  const UpdateAddModalInput = event => {
+  const updateAddModalInput = event => {
     setmodalData({
       ...modalData,
       [event.target.name]: event.target.value
@@ -45,21 +45,21 @@ function AddModal(props) {
             placeholder="Name"
             name="name"
             value={modalData.name}
-            onChange={UpdateAddModalInput}
+            onChange={updateAddModalInput}
             className="mb-2"
           />
           <Input
             placeholder="Email"
             name="email"
             value={modalData.email}
-            onChange={UpdateAddModalInput}
+            onChange={updateAddModalInput}
             className="mb-2"
           />
           <Input
             placeholder="Body"
             name="body"
             value={modalData.body}
-            onChange={UpdateAddModalInput}
+            onChange={updateAddModalInput}
             className="mb-2"
           />
         </Modal.Body>
@@ -67,7 +67,7 @@ function AddModal(props) {
           <Button variant="secondary" onClick={() => handleClose()}>
             Close
           </Button>
-          <Button variant="primary" onClick={AddModalData}>
+          <Button variant="primary" onClick={addModalData}>
             Add
           </Button>
         </Modal.Footer>

@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "reactstrap";
 import DisplayData from "./components/Table/DisplayData";
 import "./FetchData.css";
 import getLocalData from "./checklocalStorage";
 import AddModal from "./components/Table/Add/AddModal";
+import MyContext from "./components/context/context";
 
 function FetchData() {
   const [data, setdata] = useState(getLocalData);
@@ -13,6 +14,13 @@ function FetchData() {
   const [showNullButton, setshowNullButton] = useState(false);
   const [valAndNull, setvalAndNull] = useState("val");
   const [showAddModal, setshowAddModal] = useState(false);
+  const context = useContext(MyContext);
+  const myContext = Object.assign([], context);
+  // console.log('====================================');
+  console.log(context);
+  console.log(myContext);
+  // console.log(myContext.datas);
+  // console.log('====================================');
 
   //!====================== Fetch Data ========================
   const fetchTheData = async () => {
@@ -46,9 +54,9 @@ function FetchData() {
   const addDataModal = () => {
     setshowAddModal(!showAddModal);
   };
-  const addDataModalHide = (childAddDataModal)=>{
-    setshowAddModal(childAddDataModal)
-  }
+  const addDataModalHide = childAddDataModal => {
+    setshowAddModal(childAddDataModal);
+  };
 
   // !======================== DELETE =========================
   const deleteThis = id => {
@@ -67,9 +75,9 @@ function FetchData() {
     setdata(dataCopy);
   };
 
+  
+
   // !============================= Edit ==============================
-
-
 
   // ?===========================================================================================
   // ?======================================= RETURN ============================================
@@ -81,8 +89,8 @@ function FetchData() {
       {/*//! ============================ Add Modal ============================ */}
       {showAddModal &&
         <AddModal
-        addDataModalHide={addDataModalHide}
-        data={data}
+          addDataModalHide={addDataModalHide}
+          data={data}
           addDataToLocalStorage={addDataToLocalStorage}
           showAddModal={showAddModal}
         />}
@@ -141,6 +149,7 @@ function FetchData() {
           deleteThis={deleteThis}
           data={data}
           searchItem={searchItem}
+          // editDataToLocalStorage={editDataToLocalStorage}
         />
       </div>
     </div>
